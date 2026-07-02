@@ -27,6 +27,11 @@
     --hero-panel-shift-y: 46px;   /* mobile vertical nudge — larger = pushes panel further down, revealing more face above it */
     --hero-panel-w-desktop: 540px;/* desktop panel max width */
     --hero-img-pos: top center;   /* focal point of the hero photo, e.g. "top center" or "20% 15%" */
+
+    /* ---- SERVICE THUMBNAIL TUNING (adjust to bring faces into view) ---- */
+    --svc-img-pos-1: center 18%;  /* Roofing photo */
+    --svc-img-pos-2: center 22%;  /* Plumbing photo */
+    --svc-img-pos-3: center 15%;  /* Accident photo */
   }
   html{scroll-behavior:smooth;}
   @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} *{animation-duration:.001ms !important; transition-duration:.001ms !important;} }
@@ -144,6 +149,9 @@
     border:1px solid rgba(255,255,255,.1);
   }
   .svc-thumb img{ width:100%; height:100%; object-fit:cover; }
+  .svc-card:nth-child(1) .svc-thumb img{ object-position:var(--svc-img-pos-1); }
+  .svc-card:nth-child(2) .svc-thumb img{ object-position:var(--svc-img-pos-2); }
+  .svc-card:nth-child(3) .svc-thumb img{ object-position:var(--svc-img-pos-3); }
   .svc-body{ flex:1; min-width:0; }
   .svc-tag{ font-family:'Space Mono',monospace; font-size:.62rem; letter-spacing:.14em; text-transform:uppercase; color:var(--em); }
   .svc-body h3{ font-size:1.05rem; margin-top:.2rem; }
