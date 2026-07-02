@@ -202,6 +202,26 @@
   .why-chip h3{ font-size:1rem; margin-top:.35rem; }
   .why-chip p{ font-size:.8rem; color:var(--muted); margin-top:.4rem; line-height:1.55; }
 
+  /* ===== FAQ ===== */
+  .faq-list{ display:flex; flex-direction:column; gap:.8rem; }
+  .faq-item{ border-radius:18px; overflow:hidden; }
+  .faq-item summary{
+    list-style:none; cursor:pointer;
+    display:flex; align-items:center; justify-content:space-between; gap:1rem;
+    padding:1.15rem 1.3rem;
+    font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:.95rem;
+  }
+  .faq-item summary::-webkit-details-marker{ display:none; }
+  .faq-plus{
+    width:28px; height:28px; border-radius:50%; flex-shrink:0;
+    display:flex; align-items:center; justify-content:center;
+    background:rgba(255,255,255,.06);
+    transition:transform .25s ease, background .25s ease;
+  }
+  .faq-plus svg{ width:13px; height:13px; stroke:var(--gold-soft); fill:none; stroke-width:2.2; }
+  .faq-item[open] .faq-plus{ transform:rotate(45deg); background:rgba(240,193,92,.18); }
+  .faq-answer{ padding:0 1.3rem 1.25rem; color:var(--muted); font-size:.85rem; line-height:1.65; max-width:62ch; }
+
   /* ===== CONTACT ===== */
   #contact .glass{ padding:2rem 1.4rem; border-radius:26px; text-align:center; }
   #contact h2{ font-size:clamp(1.5rem,6vw,2rem); }
@@ -315,6 +335,10 @@
     }
     .why-chip{ padding:1.8rem 1.5rem; }
 
+    .faq-list{ display:grid; grid-template-columns:repeat(2,1fr); gap:1rem; align-items:start; }
+    .faq-item summary{ padding:1.4rem 1.6rem; font-size:1rem; }
+    .faq-answer{ padding:0 1.6rem 1.5rem; font-size:.88rem; }
+
     .contact-actions{ flex-direction:row; max-width:460px; margin-left:auto; margin-right:auto; }
     #contact .glass{ padding:3.2rem 3rem; max-width:760px; margin:0 auto; }
 
@@ -346,6 +370,9 @@
       </a>
       <a href="#why" class="rail-item" data-nav title="Why Ana">
         <svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-9.3-8.9C1.2 7.8 3 4.5 6.4 4.5c2 0 3.4 1.2 5.6 3.6 2.2-2.4 3.6-3.6 5.6-3.6 3.4 0 5.2 3.3 3.7 6.6C19 15.6 12 20 12 20Z"/></svg>
+      </a>
+      <a href="#faq" class="rail-item" data-nav title="FAQ">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 2-3 4.5"/><line x1="12" y1="17.5" x2="12" y2="17.6"/></svg>
       </a>
       <a href="#contact" class="rail-item" data-nav title="Contact">
         <svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="14" rx="2"/><path d="m4 6.5 8 6 8-6"/></svg>
@@ -450,6 +477,52 @@
   </div>
 </section>
 
+<!-- FAQ -->
+<section id="faq">
+  <div class="section-head fade-in">
+    <span class="eyebrow">Questions</span>
+    <h2>Good to know<br/>before you call.</h2>
+  </div>
+  <div class="faq-list fade-in">
+    <details class="faq-item glass">
+      <summary>How fast can Ana get someone out to me?
+        <span class="faq-plus"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span>
+      </summary>
+      <div class="faq-answer">Most requests get a same-day response, and urgent issues like storm damage or a burst pipe are treated as priority. Reach out by call or WhatsApp and Ana will tell you exactly what to expect before anyone shows up.</div>
+    </details>
+    <details class="faq-item glass">
+      <summary>Do you handle emergencies?
+        <span class="faq-plus"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span>
+      </summary>
+      <div class="faq-answer">Yes. Burst pipes, storm-damaged roofs, and the aftermath of a car accident don't wait for business hours, so Ana doesn't either. Message any time and you'll hear back fast.</div>
+    </details>
+    <details class="faq-item glass">
+      <summary>Is there a fee just to get a quote?
+        <span class="faq-plus"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span>
+      </summary>
+      <div class="faq-answer">No. Initial consultations for roofing and plumbing are free, with no pressure to commit. You'll get an honest read on the problem and your options before any money changes hands.</div>
+    </details>
+    <details class="faq-item glass">
+      <summary>What happens after a car accident?
+        <span class="faq-plus"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span>
+      </summary>
+      <div class="faq-answer">Ana becomes your advocate from the first call — walking you through next steps, connecting you with the right resources, and staying on your side while things get sorted out.</div>
+    </details>
+    <details class="faq-item glass">
+      <summary>Do you only work in Sandy Springs?
+        <span class="faq-plus"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span>
+      </summary>
+      <div class="faq-answer">Sandy Springs is home base, but Ana also serves the surrounding metro Atlanta area. If you're nearby and not sure you're covered, just ask — it takes one message to find out.</div>
+    </details>
+    <details class="faq-item glass">
+      <summary>How do I actually get started?
+        <span class="faq-plus"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span>
+      </summary>
+      <div class="faq-answer">Call or WhatsApp — whichever is easier. Tell Ana what's going on and she'll point you toward the right help, whether that's roofing, plumbing, or support after an accident.</div>
+    </details>
+  </div>
+</section>
+
 <!-- CONTACT -->
 <section id="contact">
   <div class="glass fade-in">
@@ -484,6 +557,10 @@
     <svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-9.3-8.9C1.2 7.8 3 4.5 6.4 4.5c2 0 3.4 1.2 5.6 3.6 2.2-2.4 3.6-3.6 5.6-3.6 3.4 0 5.2 3.3 3.7 6.6C19 15.6 12 20 12 20Z"/></svg>
     Why Ana
   </a>
+  <a href="#faq" class="dock-item" data-nav>
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 2-3 4.5"/><line x1="12" y1="17.5" x2="12" y2="17.6"/></svg>
+    FAQ
+  </a>
   <a href="#contact" class="dock-item" data-nav>
     <svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="14" rx="2"/><path d="m4 6.5 8 6 8-6"/></svg>
     Contact
@@ -504,7 +581,7 @@
 
   // active nav sync (dock + rail) via section position
   const navLinks = document.querySelectorAll('[data-nav]');
-  const sections = ['home','services','why','contact'].map(id=>document.getElementById(id));
+  const sections = ['home','services','why','faq','contact'].map(id=>document.getElementById(id));
   const sectionIO = new IntersectionObserver((entries)=>{
     entries.forEach(entry=>{
       if(entry.isIntersecting){
