@@ -32,6 +32,7 @@
     --svc-img-pos-1: center 18%;  /* Roofing photo */
     --svc-img-pos-2: center 22%;  /* Plumbing photo */
     --svc-img-pos-3: center 15%;  /* Accident photo */
+    --svc-thumb-h-desktop: 260px; /* height of the photo box on desktop/tablet — bigger = more of the image shows */
   }
   html{scroll-behavior:smooth;}
   @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} *{animation-duration:.001ms !important; transition-duration:.001ms !important;} }
@@ -306,7 +307,7 @@
     }
     .svc-card:nth-child(2){ margin-top:2.4rem; }
     .svc-card:nth-child(3){ margin-top:-1.2rem; }
-    .svc-thumb{ width:100%; height:170px; border-radius:16px; }
+    .svc-thumb{ width:100%; height:var(--svc-thumb-h-desktop); border-radius:16px; }
     .svc-arrow{ align-self:flex-end; }
 
     .why-scroll{
