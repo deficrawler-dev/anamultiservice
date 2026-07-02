@@ -257,16 +257,66 @@
   .dock-item.active{ color:var(--gold-soft); }
   .dock-item.active svg{ stroke:var(--gold-soft); }
 
-  /* WhatsApp floating bubble */
-  .wa-fab{
+  /* ===== WHATSAPP LIVE CHAT WIDGET ===== */
+  #wa-widget{
     position:fixed; right:1rem; z-index:75;
     bottom:calc(var(--dock-h) + env(safe-area-inset-bottom) + .8rem);
-    width:52px; height:52px; border-radius:50%;
-    display:flex; align-items:center; justify-content:center;
-    background:var(--em); box-shadow:0 8px 24px rgba(31,163,122,.45);
-    border:none; cursor:pointer;
+    font-family:'Inter',sans-serif;
   }
-  .wa-fab svg{ width:25px; height:25px; fill:#03150F; }
+  #wa-panel{
+    display:none;
+    position:absolute; bottom:66px; right:0;
+    width:280px; max-width:80vw;
+    border-radius:22px; overflow:hidden;
+  }
+  .wa-panel-head{
+    display:flex; align-items:center; gap:.8rem;
+    padding:1rem 1.1rem;
+    background:linear-gradient(135deg, var(--em), var(--em-deep));
+  }
+  .wa-panel-avatar{
+    width:40px; height:40px; border-radius:50%;
+    background:rgba(10,11,13,.55); border:2px solid rgba(255,255,255,.35);
+    display:flex; align-items:center; justify-content:center; font-size:1.15rem; flex-shrink:0;
+  }
+  .wa-panel-name{ font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:.9rem; color:#03150F; }
+  .wa-panel-status{ font-size:.68rem; color:#03150F; opacity:.75; margin-top:.1rem; }
+  .wa-panel-close{
+    margin-left:auto; background:none; border:none; cursor:pointer;
+    font-size:1.1rem; color:#03150F; line-height:1; opacity:.75;
+  }
+  .wa-panel-body{ padding:1rem 1.1rem; }
+  .wa-bubble{
+    font-size:.83rem; line-height:1.55; color:var(--paper);
+    background:rgba(255,255,255,.06); border:1px solid var(--glass-border);
+    border-radius:14px; padding:.85rem .95rem; margin-bottom:.9rem;
+  }
+  .wa-svc-list{ display:flex; flex-direction:column; gap:.5rem; }
+  .wa-svc-btn{
+    display:flex; align-items:center; gap:.6rem;
+    background:rgba(255,255,255,.05); border:1px solid var(--glass-border);
+    color:var(--paper); padding:.65rem .8rem; border-radius:12px;
+    cursor:pointer; font-size:.82rem; text-align:left; font-family:'Inter',sans-serif;
+    transition:background .18s, border-color .18s;
+  }
+  .wa-svc-btn:hover{ background:rgba(240,193,92,.12); border-color:rgba(240,193,92,.4); }
+  .wa-panel-note{ padding:.5rem 1.1rem 1rem; font-size:.63rem; color:var(--muted); text-align:center; }
+  #wa-btn{
+    width:56px; height:56px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    background:var(--em); border:none; cursor:pointer;
+    box-shadow:0 8px 24px rgba(31,163,122,.45);
+    transition:transform .2s ease;
+  }
+  #wa-btn:hover{ transform:scale(1.06); }
+  #wa-btn svg{ width:26px; height:26px; fill:#03150F; }
+  #wa-dot{
+    position:absolute; top:0; right:0;
+    width:14px; height:14px; border-radius:50%;
+    background:var(--gold); border:2px solid var(--ink);
+    animation:wa-pulse 2s infinite;
+  }
+  @keyframes wa-pulse{ 0%,100%{transform:scale(1);opacity:1;} 50%{transform:scale(1.3);opacity:.7;} }
 
   /* ===== DESKTOP RAIL (hidden until 1024px) ===== */
   .rail{ display:none; }
@@ -274,7 +324,8 @@
   /* ===================== DESKTOP (>=1024px) ===================== */
   @media (min-width:1024px){
     body{ padding-left:var(--rail-w); }
-    .dock, .wa-fab{ display:none; }
+    .dock{ display:none; }
+    #wa-widget{ bottom:1.4rem; right:1.4rem; }
 
     /* rail replaces dock */
     .rail{
@@ -379,9 +430,9 @@
       </a>
     </div>
   </div>
-  <a href="https://wa.me/17184066292?text=Hi%20Ana!%20I%27d%20like%20to%20know%20more%20about%20your%20services." target="_blank" class="rail-wa" title="WhatsApp">
+  <button class="rail-wa" title="WhatsApp" onclick="toggleWA()">
     <svg viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.46-2.4-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.87 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.42-.07-.12-.27-.2-.57-.35Z"/><path d="M12.05 21.4a9.9 9.9 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26C2.18 5.6 6.6 1.18 12.06 1.18c2.64 0 5.12 1.03 6.99 2.9a9.8 9.8 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.89 9.88Z"/></svg>
-  </a>
+  </button>
 </nav>
 
 <!-- HERO -->
@@ -398,10 +449,10 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
         Call Ana
       </a>
-      <a href="https://wa.me/17184066292?text=Hi%20Ana!%20I%27d%20like%20to%20know%20more%20about%20your%20services." target="_blank" class="btn btn-ghost glass">
+      <button onclick="toggleWA()" class="btn btn-ghost glass">
         <svg viewBox="0 0 24 24"><path fill="#1FA37A" d="M17.5 14.4c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.46-2.4-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.87 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.42-.07-.12-.27-.2-.57-.35Z"/><path fill="#1FA37A" d="M12.05 21.4a9.9 9.9 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26C2.18 5.6 6.6 1.18 12.06 1.18c2.64 0 5.12 1.03 6.99 2.9a9.8 9.8 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.89 9.88Z"/></svg>
         WhatsApp
-      </a>
+      </button>
     </div>
   </div>
 </section>
@@ -531,7 +582,7 @@
     <p>Reach out — Ana responds fast, day or night.</p>
     <div class="contact-actions">
       <a href="tel:7184066292" class="btn btn-solid">Call 718 406 62 92</a>
-      <a href="https://wa.me/17184066292?text=Hi%20Ana!%20I%27d%20like%20to%20know%20more%20about%20your%20services." target="_blank" class="btn btn-em">WhatsApp Ana</a>
+      <button onclick="toggleWA()" class="btn btn-em">WhatsApp Ana</button>
     </div>
     <div class="contact-email">anacaraccidents@gmail.com</div>
   </div>
@@ -567,10 +618,34 @@
   </a>
 </nav>
 
-<!-- MOBILE WHATSAPP FAB -->
-<a href="https://wa.me/17184066292?text=Hi%20Ana!%20I%27d%20like%20to%20know%20more%20about%20your%20services." target="_blank" class="wa-fab" aria-label="Chat on WhatsApp">
-  <svg viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.46-2.4-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.87 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.42-.07-.12-.27-.2-.57-.35Z"/><path d="M12.05 21.4a9.9 9.9 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26C2.18 5.6 6.6 1.18 12.06 1.18c2.64 0 5.12 1.03 6.99 2.9a9.8 9.8 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.89 9.88Z"/></svg>
-</a>
+<!-- WHATSAPP LIVE CHAT WIDGET -->
+<div id="wa-widget">
+  <div id="wa-panel" class="glass">
+    <div class="wa-panel-head">
+      <div class="wa-panel-avatar">👩</div>
+      <div>
+        <div class="wa-panel-name">Ana Reyes</div>
+        <div class="wa-panel-status">● Available Mon–Sun, 24/7</div>
+      </div>
+      <button class="wa-panel-close" onclick="closeWA()">✕</button>
+    </div>
+    <div class="wa-panel-body">
+      <div class="wa-bubble">Hi! I'm Ana 👋 How can I help you today? Pick a service below to get started:</div>
+      <div class="wa-svc-list">
+        <button class="wa-svc-btn" onclick="sendWA('Roofing')">🏠 Roofing</button>
+        <button class="wa-svc-btn" onclick="sendWA('Plumbing')">🔧 Plumbing</button>
+        <button class="wa-svc-btn" onclick="sendWA('Accident Consultation')">🚗 Accident Consultation</button>
+        <button class="wa-svc-btn" onclick="sendWA('General Inquiry')" style="opacity:.75">💬 General Inquiry</button>
+      </div>
+    </div>
+    <div class="wa-panel-note">You'll be redirected to WhatsApp</div>
+  </div>
+
+  <button id="wa-btn" onclick="toggleWA()" aria-label="Chat on WhatsApp" title="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.46-2.4-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.87 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.42-.07-.12-.27-.2-.57-.35Z"/><path d="M12.05 21.4a9.9 9.9 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26C2.18 5.6 6.6 1.18 12.06 1.18c2.64 0 5.12 1.03 6.99 2.9a9.8 9.8 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.89 9.88Z"/></svg>
+    <div id="wa-dot"></div>
+  </button>
+</div>
 
 <script>
   // fade-in on scroll
@@ -593,6 +668,28 @@
     });
   },{threshold:.5, rootMargin:'-10% 0px -40% 0px'});
   sections.forEach(s=>{ if(s) sectionIO.observe(s); });
+
+  // WhatsApp widget
+  function toggleWA(){
+    const panel = document.getElementById('wa-panel');
+    const dot = document.getElementById('wa-dot');
+    const isOpen = panel.style.display === 'block';
+    panel.style.display = isOpen ? 'none' : 'block';
+    dot.style.display = isOpen ? '' : 'none';
+  }
+  function closeWA(){
+    document.getElementById('wa-panel').style.display = 'none';
+  }
+  function sendWA(service){
+    const phone = '17184066292';
+    const msg = encodeURIComponent("Hi Ana! I'm interested in your " + service + ". Could you please help me?");
+    window.open('https://wa.me/' + phone + '?text=' + msg, '_blank');
+  }
+  // draw attention to the widget after a few seconds
+  setTimeout(()=>{
+    const dot = document.getElementById('wa-dot');
+    if(dot) dot.style.display = '';
+  }, 3000);
 </script>
 
 </body>
